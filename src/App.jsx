@@ -1,5 +1,6 @@
 import NavBar from './components/navbar/Navbar';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
+import contador from './components/contador';
 import './App.css'
 
 function App() {
@@ -8,6 +9,8 @@ function App() {
     <div className='container-app'>
       <NavBar />
       <ItemListContainer greeting= {"Bienvenidos a Mi sitio E-commerce"} />
+
+      <contador />
     </div>
   )
 }
