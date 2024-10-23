@@ -9,8 +9,6 @@ function App() {
     <div className='container-app'>
       <NavBar />
       <ItemListContainer greeting= {"Bienvenidos a Mi sitio E-commerce"} />
-
-      <Contador />
     </div>
   )
 }
