@@ -1,5 +1,5 @@
 import CartWidget from "./CartWidget"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import "./Navbar.scss"
 
 
@@ -12,7 +12,7 @@ const NavBar = () => {
 
         <ul className="categorias">
             <li className="categoria">
-                <Link to="/categoria/Camisetas">Camisetas</Link>
+                <NavLink to="/categoria/Camisetas" className={ ({isActive}) => ( isActive ? "active-link" : "") }>Camisetas</NavLink>
             </li>
             <li className="categoria">
                 <Link to="/categoria/espinilleras">Espinilleras</Link>
