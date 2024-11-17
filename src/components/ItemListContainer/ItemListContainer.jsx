@@ -13,7 +13,7 @@ const ItemListContainer = ({ greeting }) => {
         .then( (dataProducts) => {
             if(idCategoria){
                 //fitrar por categoria datos
-                const filterProducts = dataProducts.filter( (product)=> product.categoria === idCategoria )
+                const filterProducts = dataProducts.filter( (product)=> product.category === idCategoria )
                 setProducts(filterProducts)
             }else{
                 //guardar todos los products
