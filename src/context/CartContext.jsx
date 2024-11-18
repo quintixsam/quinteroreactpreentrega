@@ -7,7 +7,24 @@ const CartProvider = ({ children }) => {
 const [cart, setCart] = useState([])
 
 const addProductInCart = (newProduct) => {
-    setCart( [ ...cart, newProduct ] )
+
+    const condicion = inIncart(newProduct.id)
+    if(condicion){
+        //sumar cantidades
+        const tempCart = [...cart]
+        const findIndex = tempCart.findIndex( (productCart)=> productCart.id === newProduct.id )
+        tempCart[findIndex].quantity = tempCart[findIndex].quantity + newProduct.quantity
+
+        setCart(tempCart)
+    }else{
+        //guardar como nuevo
+        setCart( [ ...cart, newProduct ] )
+    }
+}
+
+//funcion devuelve true/false, depende del producto en el carrito si esta a comprobar
+const inIncart = (idProduct) => {
+    return cart.some( (productCart) => productCart.id === idProduct )
 }
 
 // cantidad total productos
@@ -18,7 +35,7 @@ const totalQuantity = () => {
 
 //precio total compra de todo
 const totalPrice = () => {
-    const price = cart.reduce( (total, productCart) => total + ( productCart.quantity * productCart.price, 0))
+    const price = cart.reduce( (total, productCart) => total + ( productCart.quantity * productCart.price), 0)
     return price
 }
 

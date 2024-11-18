@@ -6,9 +6,12 @@ import "./itemlistcontainer.scss"
 
 const ItemListContainer = ({ greeting }) => {
     const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)
     const { idCategoria } = useParams()
 
     useEffect( ( )=> {
+        setLoading(true)
+
         getProducts()
         .then( (dataProducts) => {
             if(idCategoria){
@@ -24,18 +27,21 @@ const ItemListContainer = ({ greeting }) => {
         console.error(error)
         })
         .finally( ()=> {
-            console.log("finalizo la promesa")
+            setLoading(false)
         })
     }, [idCategoria])
-
-
-    
 
 
     return (
         <div className="item-list-container">
             <h2>{greeting}</h2>
-            <ItemList products={products} />
+            {
+                loading === true ? (
+                    <div>Cargando...</div>
+                ) : (
+                    <ItemList products={products} />
+                )
+            }
         </div>
     )
 }

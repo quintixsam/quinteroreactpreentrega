@@ -1,8 +1,20 @@
 import { useContext } from "react"
 import { CartContext } from "../../context/CartContext"
+import { Link } from "react-router-dom"
 
 const Cart = () => {
     const { cart, totalPrice, deleteproductById, deleteCart } = useContext(CartContext)
+
+  //Early Return
+  if(cart.length === 0){
+    return(
+      <div>
+        <h2>No Tienes Nada en el Carrito 🛒🛒🛒</h2>
+        <Link to="/">Volver al Inicio</Link>
+      </div>
+    )
+  }
+  
   return (
     <div>
         <h2>Productos Añadidos al Carrito</h2>
