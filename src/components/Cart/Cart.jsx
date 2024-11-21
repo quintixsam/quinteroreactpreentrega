@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { CartContext } from "../../context/CartContext"
 import { Link } from "react-router-dom"
+import { MdDelete } from "react-icons/md"; 
 
 const Cart = () => {
     const { cart, totalPrice, deleteproductById, deleteCart } = useContext(CartContext)
@@ -27,7 +28,7 @@ const Cart = () => {
                 <p>Precio Unidad: {productCart.price}</p>
                 <p>Precio Parcial: {productCart.quantity * productCart.price}</p>
 
-                <button onClick={ () => deleteproductById(productCart.id) } >Eliminar Producto</button>
+                <button onClick={ () => deleteproductById(productCart.id) } ><MdDelete /></button>
             </div>
         ))
         }
