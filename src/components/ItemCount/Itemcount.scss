@@ -1,0 +1,60 @@
+.item-count {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .controls-count {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        button {
+            width: 40px;
+            height: 40px;
+            background-color: #292424;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #444444; 
+            }
+
+            &:disabled {
+                background-color: #ccc; /* Fondo gris si está deshabilitado */
+                cursor: not-allowed;
+            }
+        }
+
+        p {
+            width: 50px;
+            text-align: center;
+            font-size: 20px;
+            color: #292424;
+            margin: 0;
+        }
+    }
+
+    .button-add {
+        background-color: #292424;
+        color: #fff;
+        width: 150px;
+        height: 40px;
+        font-size: 15px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #444444;
+        }
+    }
+}

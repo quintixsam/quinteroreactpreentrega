@@ -2,6 +2,7 @@ import ItemCount from "../ItemCount/ItemCount"
 import { useContext, useState } from "react"
 import { CartContext } from "../../context/CartContext"
 import { Link } from "react-router-dom"
+import "./ItemDetail.scss"
 
 
 const ItemDetail = ({ product }) => {
@@ -16,17 +17,17 @@ const ItemDetail = ({ product }) => {
     }
 
   return (
-    <div style={{display: "flex"}}>
-        <img src={product.image} width={500} alt="" />
+    <div className="item-detail">
+        <img src={product.image} alt={`Imagen de ${product.name}`} className="item-image" />
         <div>
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
-            <p>Precio: ${product.price}</p>
+            <h2 className="detail-title">{product.name}</h2>
+            <p className="detail-description">{product.description}</p>
+            <p className="detail-price">Precio: ${product.price}</p>
             {
               showItemCount === true ? (
                 <ItemCount stock={product.stock} addProduct={addProduct} />
               ) : (
-                <Link to="/cart">Finalizar mi Compra</Link>
+                <Link to="/cart" className="finalize-link">Finalizar mi Compra</Link>
               )
             }
         </div>
