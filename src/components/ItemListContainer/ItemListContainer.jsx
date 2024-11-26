@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
-import { getProducts } from "../../data/data.js"
-import { useParams } from "react-router-dom"
 import ItemList from "./ItemList.jsx"
+import { useParams } from "react-router-dom"
+import { collection, getDocs, query, where } from "firebase/firestore"
+import db from "../../db/db.js"
 import "./itemlistcontainer.scss"
 
 const ItemListContainer = ({ greeting }) => {
@@ -9,26 +10,39 @@ const ItemListContainer = ({ greeting }) => {
     const [loading, setLoading] = useState(true)
     const { idCategoria } = useParams()
 
-    useEffect( ( )=> {
-        setLoading(true)
+    const getProducts = () => {
+        const productsRef = collection( db, "products" )
+        getDocs(productsRef)
+        .then((dataDb)=> {
+        //formateo correcto
+        const productsDb = dataDb.docs.map((productDb)=> {
+            return { id: productDb.id , ...productDb.data() }
+        })
+        
+        setProducts(productsDb)
+        })
+    }
 
-        getProducts()
-        .then( (dataProducts) => {
-            if(idCategoria){
-                //fitrar por categoria datos
-                const filterProducts = dataProducts.filter( (product)=> product.category === idCategoria )
-                setProducts(filterProducts)
-            }else{
-                //guardar todos los products
-                setProducts(dataProducts)
-            }
+    const getProductsByCategory = () => {
+        const productsRef = collection(db, "products")
+        const queryCategories = query( productsRef, where("category", "==", idCategoria) )
+        getDocs(queryCategories)
+        .then((dataDb)=>{
+            const productsDb = dataDb.docs.map((productDb)=>{
+            return { id: productDb.id, ...productDb.data() }
+            })
+
+            setProducts(productsDb)
         })
-        .catch( (error)=> {
-        console.error(error)
-        })
-        .finally( ()=> {
-            setLoading(false)
-        })
+    }
+
+    useEffect( ( )=> {
+        setLoading(false)
+        if(idCategoria){
+            getProductsByCategory()
+        }else{
+            getProducts()
+        }
     }, [idCategoria])
 
 
